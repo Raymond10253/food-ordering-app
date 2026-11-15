@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Home from './pages/home';
+import Login from './pages/login';
+import Menu from './pages/menu';
+import Checkout from './pages/checkout';
+import Navbar from './navbar';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      
-    </>
+      <>
+        <Navbar />
+      </>
   )
 }
 
