@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
     return(
         <>
-            <header className="py-4 bg-zinc-900/80 border-b border-zinc-800/80 text-sky-400 bg-gradient-to-br from-zinc-900/80 via-sky-400/50 to-zinc-900/80">
+            <header className="py-4 bg-zinc-900/80 border-b border-zinc-800/80 text-sky-400 bg-gradient-to-br from-zinc-900/80 via-sky-400/50 to-zinc-900/80 sticky">
                 <div className="flex justify-between px-4 ">
                     <div className="relative w-full">
                         <i 
@@ -10,7 +10,7 @@ export default function Navbar() {
                         ></i>
                         <input 
                         type="text"
-                        className="py-1 pl-5 rounded-full focus:outline-none w-[300px] border border-sky-400"
+                        className="py-1 pl-8 rounded-full focus:outline-none w-[300px] border border-sky-400"
                          />
                     </div>
                     <div className="text-xl">

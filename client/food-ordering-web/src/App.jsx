@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Menu from './pages/menu';
 import Checkout from './pages/checkout';
+import Signup from './pages/signup';
 import Navbar from './navbar';
 import './App.css'
 
@@ -11,7 +12,8 @@ function App() {
 
   return (
       <>
-        <Navbar />
+        <Navbar/>
+        <Signup />
       </>
   )
 }
