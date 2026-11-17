@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Login from './pages/login';
 import Menu from './pages/menu';
@@ -12,8 +12,13 @@ function App() {
 
   return (
       <>
-        <Navbar/>
-        <Signup />
+      <Navbar />
+      <div
+      className='py-24 px-5'
+      >
+        <Checkout />
+      </div>
+      
       </>
   )
 }

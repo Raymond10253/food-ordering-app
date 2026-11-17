@@ -31,14 +31,14 @@ export default function Signup() {
                     >
                         <div>
                             <h4
-                            className="font-bold text-sky-400 text-xl uppercase font-bold"
+                            className="font-bold text-xl uppercase font-bold text-orange-500"
                             >
                                 Sign up
                             </h4>
                         </div>
                         <div>
                             <label
-                            className="block font-semibold text-sky-400"
+                            className="block font-semibold text-orange-500"
                             >
                                 First Name
                             </label>
@@ -53,7 +53,7 @@ export default function Signup() {
                         </div>
                         <div>
                             <label
-                            className="block font-semibold text-sky-400"
+                            className="block font-semibold text-orange-500"
                             >
                                 Last Name
                             </label>
@@ -68,7 +68,7 @@ export default function Signup() {
                         </div>
                         <div>
                             <label htmlFor=""
-                            className="block font-semibold text-sky-400"
+                            className="block font-semibold text-orange-500"
                             >
                                 Email
                             </label>
@@ -84,7 +84,7 @@ export default function Signup() {
                         <div>
                             <label 
                             htmlFor=""
-                            className="block font-semibold text-sky-400"
+                            className="block font-semibold text-orange-500"
                             >
                                 Password
                             </label>
@@ -100,7 +100,7 @@ export default function Signup() {
                         <div>
                             <label 
                             htmlFor=""
-                            className="block font-semibold text-sky-400"
+                            className="block font-semibold text-orange-500"
                             >
                                 Confirm password
                             </label>
@@ -127,7 +127,7 @@ export default function Signup() {
                         </div>
                         <button
                         type='submit'
-                        className="bg-sky-500 w-full py-1 rounded-xl"
+                        className="w-full py-1 rounded-xl bg-orange-500 hover:bg-orange-600 hover:scale-105"
                         >
                             SIGN IN
                         </button>

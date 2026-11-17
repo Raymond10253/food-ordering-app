@@ -14,22 +14,18 @@ export default function Login(){
 
     return(
         <>
-        <div className="h-screen backdrop-blur-sm z-50">
-            <div
-            className="backdrop-blur-sm"
-            >
-
-            </div>
+        <div className="w-full flex justify-center items-center my-10">
+            
            <div
-            className="w-full flex justify-center items-center"
+            className="w-full"
             >
                 <form
-                className="space-y-3 p-3 shadow shadow-2xl rounded-2xl bg-slate-100"
+                className="space-y-3 p-3 shadow shadow-2xl rounded-2xl bg-slate-100 max-w-[300px] mx-auto"
                 onSubmit={handleSubmit}
                 >
                     <div>
                         <h4
-                        className="uppercase font-bold text-sky-400"
+                        className="uppercase font-bold text-orange-500 text-xl"
                         >
                             log in
                         </h4>
@@ -37,7 +33,7 @@ export default function Login(){
                     <div>
                         <label 
                         htmlFor=""
-                        className="block font-semibold text-sky-400"
+                        className="block font-semibold text-orange-500"
                         >
                             Username
                         </label>
@@ -47,13 +43,13 @@ export default function Login(){
                         required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="border border-sky-400 p-1 rounded-xl"
+                        className="border border-sky-400 p-1 rounded-xl w-full"
                         />
                     </div>
                     <div>
                         <label 
                         htmlFor=""
-                        className="block font-semibold text-sky-400"
+                        className="block font-semibold text-orange-500"
                         >
                             Email
                         </label>
@@ -63,13 +59,13 @@ export default function Login(){
                         value={email}
                         required
                         onChange={(e) => setEmail(e.target.value)}
-                        className="border border-sky-400 p-1 rounded-xl"
+                        className="border border-sky-400 p-1 rounded-xl w-full"
                         />
                     </div>
                     <div>
                         <label 
                         htmlFor=""
-                        className="block font-semibold text-sky-400"
+                        className="block font-semibold text-orange-500"
                         >
                             Password
                         </label>
@@ -79,7 +75,7 @@ export default function Login(){
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="border border-sky-500 p-1 rounded-xl"
+                        className="border border-sky-500 p-1 rounded-xl w-full"
                         />
                     </div>
                     <div
@@ -93,7 +89,7 @@ export default function Login(){
                     <button
                     type='submit'
                     onClick={() => setIsLoading(true)}
-                    className="uppercase font-bold bg-sky-400 w-full py-1 rounded-md my-1 hover:bg-sky-500 transition duration-500 hover:scale-105"
+                    className="uppercase font-bold py-1 rounded-md my-1 transition duration-500 hover:scale-105 w-full bg-orange-500 hover:bg-orange-600"
                     >
                        {isLoading ? 'Submiting...' : 'LOG IN'}
                     </button>

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
 export default function Navbar() {
     return(
         <>
-            <header className="py-4 bg-zinc-900/80 border-b border-zinc-800/80 text-sky-400 bg-gradient-to-br from-zinc-900/80 via-sky-400/50 to-zinc-900/80 sticky">
+            <header className="py-4 border-b border-zinc-800/80 from-zinc-900/80 via-sky-400/50 to-zinc-900/80 sticky bg-zinc-950">
                 <div className="flex justify-between px-4 ">
                     <div className="relative w-full">
                         <i 
-                        className="fa-solid fa-magnifying-glass absolute left-3 top-4 -translate-y-1/2"
+                        className="fa-solid fa-magnifying-glass absolute left-3 top-4 -translate-y-1/2 text-sky-400"
                         ></i>
                         <input 
                         type="text"
@@ -14,9 +13,14 @@ export default function Navbar() {
                          />
                     </div>
                     <div className="text-xl">
-                        <i 
-                        className="fa-solid fa-bars text-2xl"
+                        <button
+                        className="hover:scale-105 transition duration-300"
+                        >
+                            <i 
+                        className="fa-solid fa-bars text-2xl text-sky-500"
                         ></i>
+                        </button>
+                        
                     </div>
                 </div>
             </header>
