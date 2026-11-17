@@ -246,6 +246,7 @@ export default function Checkout({
                 onSubmit={handlePlaceOrder}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-8"
                 >
+                    
                     <div
                     className="lg:col-span-7 space-y-6"
                     >
@@ -355,12 +356,12 @@ export default function Checkout({
                                 </div>
                                 <div>
                                     <h2
-                                    className="text-lg font-bold"
+                                    className="text-lg font-bold mb-3"
                                     >
                                         Payment method
                                     </h2>
                                     <p
-                                    className="text-xs text-slate-400"
+                                    className="text-xs text-slate-400 mb-4"
                                     >
                                         Select which payment method you would like to use.
                                     </p>
@@ -368,9 +369,12 @@ export default function Checkout({
                             </div>
 
                             <div
-                            className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5"
+                            className="grid grid-cols-1 gap-3 mb-5"
                             >
-                                <button
+                                <div
+                                className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+                                >
+                                   <button
                                 type='button'
                                 onClick={() => setPaymentMethod('mpesa')}
                                 className={`p-4 rounded-xl border text-left transition flex flex-col gap-2 ${
@@ -423,7 +427,9 @@ export default function Checkout({
                                     >
                                         Cash
                                     </span>
-                                </button>
+                                </button> 
+                                </div>
+                                
 
                                 {paymentMethod === 'mpesa' && (
                                     <div
@@ -548,30 +554,161 @@ export default function Checkout({
                                 </span>
                             </div>
 
-                            <div>
+                            <div
+                            className="space-y-3 max-h-64 overflow-y-auto pr-1 mb-5"
+                            >
                                 {cart.map((item) => (
                                     <div
                                     key={item.id}
+                                    className="justify-between gap-3 py-2 border-b border-slate-800 last:border-0"
                                     >
-                                        <div>
-                                            <span>
+                                        <div
+                                        className="flex items-center gap-3 min-w-0"
+                                        >
+                                            <span
+                                            className="w-7 h-7 rounded-lg bg-slate-800 text-sky-400 font-bold text-xs flex items-center justify-center shrink-0"
+                                            >
                                                 {item.quantity}x
                                             </span>
-                                            <div>
-                                                <p></p>
+                                            <div
+                                            className="truncate"
+                                            >
+                                                <p
+                                                className="text-sm font-medium text-slate-100 truncate"
+                                                >
+                                                    {item.name}
+                                                </p>
                                                 {item.restaurant_name && (
-                                                    <p></p>
+                                                    <p
+                                                    className="text-xs text-slate-500 truncate"
+                                                    >
+                                                        {item.restaurant_name}
+                                                    </p>
                                                 )}
                                             </div>
                                         </div>
-                                        <span>
+                                        <span
+                                        className="text-sm font-semibold text-slate-200 shrink-0"
+                                        >
                                             KES {(Number(item.price).toFixed(2))}
                                         </span>
                                     </div>
                                 ))}
                             </div>
+                            <div
+                            className="mb-5"
+                            >
+                                <div
+                                className="flex gap-2"
+                                >
+                                    <input 
+                                    type="text"
+                                    placeholder="Promo code (e.g. WELCOME10)"
+                                    value={promoCode}
+                                    onChange={(e) => setPromoCode(e.target.value)}
+                                    className="flex-1 px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-400"
+                                    />
+                                    <button
+                                    type='button'
+                                    onClick={handleApplyPromo}
+                                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sm font-medium text-slate-200 transition"
+                                    >
+                                        Apply
+                                    </button>
+                                </div>
+                                {promoMessage && (
+                                    <p
+                                    className={`text-xs mt-1.5 ${
+                                        promoMessage.type === 'success' ? 'text-emerald-400' : 'text-red-400'
+                                    }`}
+                                    >
+                                        {promoMessage.text}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div
+                            className="space-y-2.5 text-sm border-t border-slate-800 pt-4 mb-6 flex justify-between"
+                            >
+                                <span
+                                
+                                >
+                                    Subtotal
+                                </span>
+                                <span>
+                                    KES {subtotal.toFixed(2)}
+                                </span>
+                            </div>
+                            <div
+                            className="flex justify-between text-slate-400"
+                            >
+                                <span
+                                >
+                                    Delivered Fee
+                                </span>
+                                <span>
+                                    KES {deliveryFee.toFixed(2)}
+                                </span>
+                            </div>
+                            <div
+                            className="flex justify-between"
+                            >
+                                <span>
+                                    Estimated Tax(8%)
+                                </span>
+                                <span>
+                                    KES {tax.toFixed(2)}
+                                </span>
+                            </div>
+                            {discount > 0 && (
+                                <div
+                                className="flex justify-between text-emerald-400 font-medium"
+                                >
+                                    <span>
+                                        Promo discount
+                                    </span>
+                                    <span>
+                                        - KES {discount.toFixed(2)}
+                                    </span>
+                                </div>
+                            )}
+                            <div
+                            className="flex justify-between text-base font-bold text-white pt-3 border-t border-slate-800"
+                            >
+                                <span>
+                                    Total
+                                </span>
+                                <span
+                                className="text-sky-400"
+                                >
+                                    KES {totalAmount.toFixed(2)}
+                                </span>
+                            </div>
+                        
+                        <button
+                        type='submit'
+                        disabled={isSubmitting}
+                        className="w-full py-3.5 px-6 rounded-xl bg-sky-400 hover:bg-sky-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-base shadow-lg shadow-sky-400/20 transition flex items-center justify-center gap-2 my-5"
+                        >
+                            {isSubmitting ? (
+                                <>
+                                   <i 
+                                   className="fa-solid fa-spinner animate-spin"
+                                   ></i>
+                                   Processing Order...
+                                </>
+                            ) : (
+                                <>
+                                    <i 
+                                    className="fa-solid fa-circle-check"
+                                    ></i>
+                                    Place Order . KES {totalAmount.toFixed(2)}
+                                </>
+                            )}
+                        </button>
                         </div>
                     </div>
+                    
                 </form>
                 </div>
                 </div>
