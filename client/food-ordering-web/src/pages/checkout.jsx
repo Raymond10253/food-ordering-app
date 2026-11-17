@@ -153,6 +153,7 @@ export default function Checkout({
             setIsSubmitting(false);
         }
     };
+/*
 
     if (cart.length === 0) {
         return (
@@ -188,11 +189,18 @@ export default function Checkout({
             </div>
         );
     }
+*/
 
     return (
-        <div>
-            <div>
-                <div>
+        <div
+        className="min-h-screen bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8"
+        >
+            <div
+            className="max-w-6xl mx-auto"
+            >
+                <div
+                className="flex items-center justify-between mb-8"
+                >
                     <button
                     type='button'
                     onClick={onBack}
@@ -204,11 +212,15 @@ export default function Checkout({
                         Back to Menu
 
                     </button>
-                    <div>
-                        <i
-                        className="fa-solid fa-halve-shield text-2xl"
+                    <div
+                    className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full"
+                    >
+                        <i 
+                        className="fa-solid fa-shield-halved"
                         ></i>
-                        <span>
+                        <span
+                        
+                        >
                             Secure Encrypted Checkout
                         </span>
                     </div>
@@ -221,7 +233,9 @@ export default function Checkout({
                 </h1>
 
                 {error && (
-                    <div>
+                    <div
+                    className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-3 text-red-400 text-sm"
+                    >
                         <span>
                             {error}
                         </span>
@@ -233,25 +247,41 @@ export default function Checkout({
                 className="grid grid-cols-1 lg:grid-cols-12 gap-8"
                 >
                     <div
-                    className="lg:col-span-7space-y-6"
+                    className="lg:col-span-7 space-y-6"
                     >
-                        <section>
-                            <div>
-                                <div>
-                                    <i></i>
+                        <section
+                        className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6"
+                        >
+                            <div
+                            className="flex items-center gap-3 mb-5"
+                            >
+                                <div
+                                className="w-9 h-9 rounded-lg bg-sky-400/15 text-sky-400 flex items-center justify-center"
+                                >
+                                    <i 
+                                    className="fa-solid fa-map-pin"
+                                    ></i>
                                 </div>
                                 <div>
-                                    <h2>
+                                    <h2
+                                    className="text-lg font-bold"
+                                    >
                                         Delivery Details
                                     </h2>
-                                    <p>
+                                    <p
+                                    className="text-xs text-slate-400"
+                                    >
                                         Where should the driver drop off your meal
                                     </p>
                                 </div>
                             </div>
-                            <div>
+                            <div
+                            className="space-y-4"
+                            >
                                 <div>
-                                    <label htmlFor="">
+                                    <label
+                                    className="block text-sm font-medium text-slate-300 mb-1.5"
+                                    >
                                         Delivery Address
                                     </label>
                                     <input 
@@ -260,11 +290,15 @@ export default function Checkout({
                                     placeholder="e.g., Apartment 4b, Moi Avenue, Building Name"
                                     value={deliveryAddress}
                                     onChange={(e) => setDeliveryAddress(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-state-500 focus:outline-none focus:border-sky-500 transition"
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-state-500 focus:outline-none focus:border-sky-400 transition"
                                     />
                                 </div>
-                                <div>
-                                    <label htmlFor="">
+                                <div
+                                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                                >
+                                    <label
+                                    className="block text-sm font-medium text-slate-300 mb-1.5"
+                                    >
                                        contact Phone 
                                     </label>
                                     <input 
@@ -276,18 +310,26 @@ export default function Checkout({
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="">
+                                    <label
+                                    className="block text-sm font-medium text-slate-300 mb-1.5"
+                                    >
                                        Estimated arrival 
                                     </label>
-                                    <div>
-                                        <i></i>
+                                    <div
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-800/80 text-slate-300 flex items-center gap-2 text-sm"
+                                    >
+                                        <i 
+                                        className="fa-regular fa-clock"
+                                        ></i>
                                         <span>
                                             25-35min
                                         </span>
                                     </div>
                                 </div>
                                 <div>
-                                    <label>
+                                    <label
+                                    className="block text-sm font-medium text-slate-300 mb-1.5"
+                                    >
                                        Delivery instuction (optional)
                                     </label>
                                     <textarea 
@@ -337,8 +379,8 @@ export default function Checkout({
                                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
                                 }`}
                                 >
-                                    <i
-                                    className="fa-solid fa-smartphone"
+                                    <i 
+                                    className="fa-solid fa-mobile-screen"
                                     ></i>
                                     <span
                                     className="font-semibold text-sm"
@@ -355,12 +397,14 @@ export default function Checkout({
                                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
                                 }`}
                                 >
-                                    <i
-                                    className="fa-solid fa-debit-card"
+                                    <i 
+                                    className="fa-solid fa-credit-card"
                                     ></i>
                                     <span
                                     className="font-semibold text-sm"
-                                    ></span>
+                                    >
+                                        Credit card
+                                    </span>
                                 </button>
                                 <button
                                 type='button'
@@ -370,16 +414,29 @@ export default function Checkout({
                                     ? 'bg-emerald-500/10 border-emerald-500 text-white'
                                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
                                 }`}
-                                ></button>
+                                >
+                                    <i 
+                                    className="fa-solid fa-money-bill-1-wave"
+                                    ></i>
+                                    <span
+                                    className="font-semibold text-sm"
+                                    >
+                                        Cash
+                                    </span>
+                                </button>
 
                                 {paymentMethod === 'mpesa' && (
-                                    <div>
-                                        <label>
+                                    <div
+                                    className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3 w-full"
+                                    >
+                                        <label
+                                        className="block text-sm font-medium text-slate-300"
+                                        >
                                             M-pesa Phone Number
                                         </label>
                                         <input 
                                         type="tel"
-                                        placeholder="07xxxxxxxx"
+                                        placeholder="07XXXXXXXX"
                                         value={mpesaPhone}
                                         onChange={(e) => setMpesaPhone(e.target.value)}
                                         className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
@@ -392,9 +449,13 @@ export default function Checkout({
                                     </div>
                                 )}
                                 {paymentMethod === 'card' && (
-                                    <div>
+                                    <div
+                                    className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3"
+                                    >
                                         <div>
-                                            <label>
+                                            <label
+                                            className="block text-sm font-medium text-slate-300 mb-1.5"
+                                            >
                                                 Cardholder's name
                                             </label>
                                             <input 
@@ -406,7 +467,9 @@ export default function Checkout({
                                             />
                                         </div>
                                         <div>
-                                            <label>
+                                            <label
+                                            className="block text-sm  font-medium text-slate-300 mb-1.5"
+                                            >
                                                 Card Number
                                             </label>
                                             <input 
@@ -418,7 +481,9 @@ export default function Checkout({
                                             />
                                         </div>
                                         <div>
-                                            <label>
+                                            <label
+                                            className="block text-sm font-medium text-slate-300 mb-1.5"
+                                            >
                                                 Expiry Date
                                             </label>
                                             <input 
@@ -430,8 +495,12 @@ export default function Checkout({
                                             className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
                                             />
                                         </div>
-                                        <div>
-                                            <label>
+                                        <div
+                                        className="w-full"
+                                        >
+                                            <label
+                                            className="block text-sm font-medium text-slate-300 mb-1.5"
+                                            >
                                                 CVC
                                             </label>
                                             <input 
@@ -455,12 +524,51 @@ export default function Checkout({
                         </section>
                     </div>
 
-                    <div>
-                        <div>
+                    <div
+                    className="lg:col-span-5"
+                    >
+                        <div
+                        className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sticky top-6"
+                        >
+                            <div
+                            className="flex items-center gap-2.5 mb-5 pb-4 border-b border-slate-800"
+                            >
+                                <i 
+                                className="fa-solid fa-receipt text-xl"
+                                ></i>
+                                <h2
+                                className="text-lg font-bold"
+                                >
+                                    Order summery
+                                </h2>
+                                <span
+                                className="ml-auto text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full"
+                                >
+                                    {cart.reduce((acc, item) => acc + item.quantity, 0)} items
+                                </span>
+                            </div>
+
                             <div>
-                                <i></i>
-                                <h2></h2>
-                                <span></span>
+                                {cart.map((item) => (
+                                    <div
+                                    key={item.id}
+                                    >
+                                        <div>
+                                            <span>
+                                                {item.quantity}x
+                                            </span>
+                                            <div>
+                                                <p></p>
+                                                {item.restaurant_name && (
+                                                    <p></p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <span>
+                                            KES {(Number(item.price).toFixed(2))}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -468,4 +576,5 @@ export default function Checkout({
                 </div>
                 </div>
     )
+
 }
