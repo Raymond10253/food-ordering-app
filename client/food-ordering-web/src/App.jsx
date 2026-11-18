@@ -16,7 +16,7 @@ function App() {
       <div
       className='py-24 px-5'
       >
-        <Checkout />
+        <Home />
       </div>
       
       </>

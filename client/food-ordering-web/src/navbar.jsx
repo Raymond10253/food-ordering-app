@@ -1,7 +1,7 @@
 export default function Navbar() {
     return(
         <>
-            <header className="py-4 border-b border-zinc-800/80 from-zinc-900/80 via-sky-400/50 to-zinc-900/80 sticky bg-zinc-950/50 backdrop-blur-sm top-0">
+            <header className="py-4 border-b border-zinc-800/80 from-zinc-900/80 via-sky-400/50 to-zinc-900/80 sticky bg-zinc-950/50 backdrop-blur-md top-0">
                 <div className="flex justify-between px-4 ">
                     <div className="relative w-full">
                         <i 
