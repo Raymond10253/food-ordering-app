@@ -139,7 +139,19 @@ import { useEffect } from "react";
     }, []);
 
     const allMenuItems = useMemo(() => {
-        return restaurants
+        return restaurants.flatMap((rest) =>
+        (rest.menu || []).map((item) => ({
+            ...item,
+            restaurant_id: rest.id,
+            restaurant_name: rest.name,
+        }))
+    );
+}, [restaurants]);
+
+const filteredRestaurants = useMemo(() => {
+    return restaurants
+
+
         .filter((rest) => {
             const matchesCategory =
                 selectedCategory === 'All' ||
@@ -315,7 +327,12 @@ import { useEffect } from "react";
                                             </p>
                                         </div>
 
-                                        <button>
+                                        <button
+                                        type='button'
+                                        onClick={() => onAddToCart(item)}
+                                        className="shrink-0 w-10 h-10 rounded-xl bg-sky-400 hover:bg-sky-500 text-white flex items-center justify-centerv transition"
+                                        title="Add to cart"
+                                        >
                                             <i
                                             className="fa-solid fa-plus"
                                             ></i>
@@ -326,6 +343,166 @@ import { useEffect } from "react";
                         )}
                     </section>
                 )}
+
+                <section
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                    <div
+                    className="flex items-center gap-2 overflow-x-auto pb-1"
+                    >
+                        {CATEGORIES.map((category)  => (
+                            <button
+                            key={category}
+                            type='button'
+                            onClick={() => setSelectedCategory(category)}
+                            className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition ${
+                                selectedCategory === category
+                                ? 'bg-sky-400 text-white shadow-md shadow-sky-500/20'
+                                : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+                            }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div
+                    className="flex items-center gap-2 self-start sm:self-auto"
+                    >
+                        <i className="fa-solid fa-sliders text-slate-400 text-xl"></i>
+                        <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="bg-slate-900 border border-slate-800 text-slate-200 text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-sky-400"
+                        >
+                            <option value="rating">Top Rated</option>
+                            <option value="fee">Lowest Delivery fee</option>
+                        </select>
+                    </div>
+                </section>
+
+                {!searchQuery && selectedCategory === 'All' && (
+                    <section>
+                        <div
+                        className="flex items-center justify-between mb-4"
+                        >
+                            <h2
+                            className="text-xl font-bold flex items-center gap-2"
+                            >
+                                <i className="fa-solid fa-ranking-star"></i>
+                                Porpular now
+                            </h2>
+                        </div>
+
+                        <div
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+                        >
+                            {popularDishes.map((dish) => (
+                                <div
+                                key={dish.id}
+                                className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-slate-700 transition group"
+                                >
+                                    <div>
+                                        <div
+                                        className="h-36 overflow-hidden relative"
+                                        >
+                                            <img 
+                                            src={dish.image}
+                                            alt={dish.name}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                                            />
+                                            <span
+                                            className="absolute top-2.5 left-2.5 bg-slate-950/85 backdrop-blur-sm text-xs font-medium text-slate-200 px-2.5 py-1 rounded-lg"
+                                            >
+                                                {dish.restaurant_name}
+                                            </span>
+                                        </div>
+                                        <div className="p-4">
+                                            <h3 className="font-bold text-slate-100 line-clamp-1">{dish.name}</h3>
+                                            <p
+                                            className="text-xs text-slate-400 line-clamp-2 mt-1"
+                                            >
+                                                {dish.description}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                    className="px-4 pb-4 flex items-center justify-between"
+                                    >
+                                        <span
+                                        className="font-extrabold text-sky-300"
+                                        >KES {dish.price}</span>
+                                        <button
+                                        type="button"
+                                        onClick={() => onAddToCart(dish)}
+                                        className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-sky-400 text-white text-xs font-semibold transition"
+                                        >
+                                            <i className="fa-solid fa-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                <section>
+                    <div className="flex items-center justify-between mb-5">
+                        <h2 className="text-xl font-bold">
+                            {selectedCategory === 'All' ? 'All Restaurants' : `${selectedCategory} Spots`}
+                            <span
+                            className="ml-2 text-sm font-normal text-slate-400"
+                            >
+                                ({filteredRestaurants.length})
+                            </span>
+                        </h2>
+                    </div>
+
+                    {loading ? (
+                        <div
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        >
+                            {[1, 2, 3].map((n) => (
+                                <div
+                                key={n}
+                                className="h-72 rounded-2xl bg-slate-900/60 border border-slate-800 animate-pulse"
+                                ></div>
+                            ))}
+                        </div>
+                    ) : filteredRestaurants.length === 0 ? (
+                        <div
+                        className="text-center py-12 bg-slate-900/50 border border-slate-800 rounded-2xl"
+                        >
+                            <p className="text-slate-400 mb-3">No restaurants matches your current filters</p>
+                            <button
+                            type='button'
+                            onClick={() => {
+                                setSelectedCategory('All');
+                                setSearchQuery('');
+                            }}
+                            className="px-4 py-2 rounded-xl bg-sky-400 text-white text-sm font-semibold "
+                            >
+                                Reset Filters
+                            </button>
+                        </div>
+                    ) : (
+                        <div
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        >
+                            {filteredRestaurants.map((restaurant) => (
+                                <div
+                                key={restaurant.id}
+                                onClick={() => handleRestaurantClick(restaurant)}
+                                className="cursor-pointer bg-slate-900 border border-slate-800 hover:border-sky-400/50 rounded-2xl overflow-hidden"
+                                >
+
+                                </div>
+                            ) )}
+                        </div>
+                    )}
+                </section>
             </main>
         </div>
     )
