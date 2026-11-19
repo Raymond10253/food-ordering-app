@@ -495,14 +495,56 @@ const filteredRestaurants = useMemo(() => {
                                 <div
                                 key={restaurant.id}
                                 onClick={() => handleRestaurantClick(restaurant)}
-                                className="cursor-pointer bg-slate-900 border border-slate-800 hover:border-sky-400/50 rounded-2xl overflow-hidden"
+                                className="cursor-pointer bg-slate-900 border border-slate-800 hover:border-sky-400/50 rounded-2xl overflow-hidden transition group flex flex-col justify-between"
                                 >
+                                    <div>
+                                        <div
+                                        className="h-44 overflow-hidden relative"
+                                        >
+                                            <img src={restaurant.image} alt={restaurant.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                                            <div
+                                            className="absolute top-3 right-3 bg-slate-950/85 backdrop-blur-sm px-2.5 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-amber-400"
+                                            >
+                                                <i className="fa-solid fa-star"></i>
+                                                {restaurant.rating}
+                                                <span className="text-slate-400 font-normal">({restaurant.reviews_count})</span>
+                                            </div>
+                                        </div>
 
+                                        <div className="p-5">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <h3 className="text-lg font-bold text-slate-100 group-hover:text-sky-300 transition">
+                                                    {restaurant.name}
+                                                </h3>
+                                                <i className="fa-solid fa-circle-chevron-right text-slate-500 group-hover:text-sky-300 transition"></i>
+                                            </div>
+                                            <p className="text-sm text-slate-400 mt-1">{restaurant.cuisine}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="px-5 py-3.5 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300">
+                                        <span className="inline-flex items-center gap-1.5">
+                                            <i className="fa-solid fa-clock text-sky-400"></i>
+                                            {restaurant.delivery_time}
+                                        </span>
+                                        <span className="inline-flex items-center gap-1.5">
+                                            <i className="fa-solid fa-map-pin text-emerald-400"></i>
+                                            Delivery: KES {restaurant.delivery_fee}
+                                        </span>
+                                    </div>
                                 </div>
                             ) )}
                         </div>
                     )}
                 </section>
+
+                {activeRestaurant && (
+                    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+                        <div className="bg-slate-900 border border-slate-800 rounded-2xl">
+                            
+                        </div>
+                    </div>
+                )}
             </main>
         </div>
     )

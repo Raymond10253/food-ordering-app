@@ -20,7 +20,7 @@ export default function Signup() {
     return(
         <>
             <div
-            className="flex items-center justify-center text-slate-100 text-sm"
+            className="flex items-center justify-center text-slate-100 text-sm inset-0 z-50 fixed bg-black/75 backdrop-blur-sm"
             >
                 <div
                 className="w-full"

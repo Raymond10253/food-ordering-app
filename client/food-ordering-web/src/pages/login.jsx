@@ -14,7 +14,7 @@ export default function Login(){
 
     return(
         <>
-        <div className="w-full flex justify-center items-center text-white">
+        <div className="w-full flex justify-center items-center text-white fixed inset-0 z-50 bg-black/75 backdrop-blur-sm p-4">
         <div
         className="w-full"
         >
