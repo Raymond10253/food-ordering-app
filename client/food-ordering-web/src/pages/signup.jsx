@@ -1,16 +1,80 @@
 import { useState } from "react"
+import { data } from "react-router-dom";
 
-export default function Signup() {
+export default function Signup({
+    onRegisterSuccess = () => {},
+    onSwitchToLogin = () => {},
+}) {
     const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
+        name: '',
         email: '',
+        phone: '',
         password: '',
-        confirmpassword: ''
+        confirmpassword: '',
     });
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+
+        if (!formData.name.trim() || !formData.email.trim() || !formData.password) {
+            setError('Please Enter the provided details');
+            return;
+        }
+
+        if (formData.password.length < 6) {
+            setError('Password must be atleast 6 characters long');
+            return;
+        }
+
+        if (formData.password !== formData.confirmpassword) {
+            setError('Password do not match')
+        }
+
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name: formData.name.trim(),
+                    email: formData.email.trim().toLowerCase(),
+                    phone: formData.phone.trim(),
+                    password: formData.password,
+                }),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Registration failed. Please try again')
+            }
+
+            localStorage.setItem('cravedash_token', data.token);
+            localStorage.setItem('cravedash_user', JSON.stringify(data.user));
+            onRegisterSuccess({user: data.user, token: data.token});
+        } catch (err) {
+            if (err.message.includes('Failed to fetch') || err.name === 'TypeError') {
+                const mockUser = {
+                    id: 1,
+                    name: formData.email.split('@')[0],
+                    email: formData.email.trim().toLowerCase(),
+                };
+                const mockToken = 'demo-jwt-token-' + Date.now();
+                localStorage.setItem('cravedash_token', mockToken);
+                localStorage.setItem('cravedash_user', JSON.stringify(mockUser));
+                onRegisterSuccess({user: mockUser, token: mockToken});
+                return;
+            };
+            setError(err.message)
+        } finally {
+            setIsLoading(false);
+        }
+
     };
 
     const handleChange = (e) => {
@@ -42,30 +106,15 @@ export default function Signup() {
                             <label
                             className="block font-semibold text-sky-500 mb-2"
                             >
-                                First Name
+                                Name
                             </label>
                             <input 
                             type="text"
                             name="firstname"
-                            value={formData.firstname}
+                            value={formData.name}
                             onChange={handleChange}
                             required
                             className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50 focus:outline-none px-2"
-                            />
-                        </div>
-                        <div>
-                            <label
-                            className="block font-semibold text-sky-500 mb-2"
-                            >
-                                Last Name
-                            </label>
-                            <input 
-                            type="text"
-                            name="lastname"
-                            value={formData.lastname}
-                            onChange={handleChange}
-                            required
-                            className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50"
                             />
                         </div>
                         <div>
@@ -78,6 +127,21 @@ export default function Signup() {
                             type="email"
                             name="email"
                             value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50"
+                            />
+                        </div>
+                        <div>
+                            <label 
+                            className="block font-semibold text-sky-500 mb-2"
+                            >
+                                Phone Number
+                            </label>
+                            <input 
+                            type='tel'
+                            name="phone"
+                            value={formData.phone}
                             onChange={handleChange}
                             required
                             className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50"

@@ -64,7 +64,7 @@ export default function Navbar({
                             : 'text-slate-300 hover:text-white hover:bg-slate-900'
                         }`}
                         >
-                            <i class="fa-solid fa-box"></i>
+                            <i className="fa-solid fa-box"></i>
                             My Orders
                         </button>
                     </nav>
