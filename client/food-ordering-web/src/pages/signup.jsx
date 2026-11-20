@@ -78,7 +78,7 @@ export default function Signup({
     };
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value}));
     }
 
     return(
@@ -87,21 +87,29 @@ export default function Signup({
             className="flex items-center justify-center text-slate-100 text-sm inset-0 z-50 fixed bg-black/75 backdrop-blur-sm"
             >
                 <div
-                className="w-full"
+                className="w-full shadow shadow-2xl rounded-2xl max-w-[300px] mx-auto bg-zinc-950 py-5 px-3"
                 >
+                    <div
+                    className="px-2"
+                    >
+                        <h4
+                        className="font-bold text-xl uppercase font-bold text-sky-400"
+                        >
+                            Sign up
+                        </h4>
+                    </div>
+
+                    {error && (
+                        <div className="text-xs text-red-500/80 space-x-2 my-2">
+                            <i className="fa-solid fa-circle-exclamation"></i>
+                            <span>{error}</span>
+                        </div>
+                    )}
                     <form
-                    className="space-y-3 shadow shadow-2xl rounded-2xl max-w-[300px] mx-auto bg-zinc-950 py-5 px-3"
+                    className="space-y-3 "
                     onSubmit={handleSubmit}
                     >
-                        <div
-                        className="px-2"
-                        >
-                            <h4
-                            className="font-bold text-xl uppercase font-bold text-sky-400"
-                            >
-                                Sign up
-                            </h4>
-                        </div>
+                        
                         <div>
                             <label
                             className="block font-semibold text-sky-500 mb-2"
@@ -110,7 +118,7 @@ export default function Signup({
                             </label>
                             <input 
                             type="text"
-                            name="firstname"
+                            name="name"
                             value={formData.name}
                             onChange={handleChange}
                             required

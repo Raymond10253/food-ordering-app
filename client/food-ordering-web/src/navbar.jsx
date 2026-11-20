@@ -6,7 +6,7 @@ import Signup from "./pages/signup"
 export default function Navbar({
     user = null,
     cartCount = 0,
-    currrentView = 'home',
+    currrentPage = 'home',
     onNavigate = () => {},
     onOpenCart = () => {},
     onOpenAuth = () => {},
@@ -15,10 +15,12 @@ export default function Navbar({
 }) {
     
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const handleNavClick = (view) => {
-        onNavigate(view);
+    const handleNavClick = (page) => {
+        onNavigate(page);
         setMobileMenuOpen(false);
     };
+
+    
     
     const [activeTab, setActiveTab] = useState('login')
 
@@ -42,15 +44,17 @@ export default function Navbar({
                         </div>
                     </button>
 
-                    <nav className="hidden md:flex items-center gap-2">
+                    <nav className="hidden md:flex items-center space-x-2">
                         <button
                         type='button'
                         onClick={() => handleNavClick('home')}
-                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold  transition ${
-                            currrentView === 'home'
-                            ? 'bg-sky-400/15 text-sky-400 border border-sky-400/30'
-                            : 'text-slate-300 hover:text-white hover:bg-slate-900'
-                        }`}
+                        className={
+        `inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
+            currrentPage === 'home'
+            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+            : 'text-slate-300 hover:text-white hover:bg-slate-900'
+        }
+        `}
                         >
                             <i className="fa-solid fa-house"></i>
                             Menus
@@ -58,14 +62,28 @@ export default function Navbar({
                         <button
                         type='button'
                         onClick={() => handleNavClick('orders')}
-                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition ${
-                            currrentView === 'orders'
-                            ? 'bg-sky-400/15 text-sky-400 border border-sky-400/30'
-                            : 'text-slate-300 hover:text-white hover:bg-slate-900'
-                        }`}
+                        className={
+        `inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
+            currrentPage === 'orders'
+            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+            : 'text-slate-300 hover:text-white hover:bg-slate-900'
+        }`}
                         >
                             <i className="fa-solid fa-box"></i>
                             My Orders
+                        </button>
+                        <button
+                        type='button'
+                        onClick={() => handleNavClick('checkout')}
+                        className={
+        `inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
+            currrentPage === 'checkout'
+            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+            : 'text-slate-300 hover:text-white hover:bg-slate-900'
+        }`}
+                        >
+                            <i className="fa-solid fa-credit-card"></i>
+                            Checkout
                         </button>
                     </nav>
                     
@@ -140,7 +158,7 @@ export default function Navbar({
                         type='button'
                         onClick={() => handleNavClick('home')}
                         className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold ${
-                            currrentView === 'home'
+                            currrentPage === 'home'
                             ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
                             : 'text-slate-300 hover:bg-slate-900'
                         }`}
@@ -152,13 +170,25 @@ export default function Navbar({
                         type='button'
                         onClick={() => handleNavClick('orders')}
                         className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold ${
-                            currrentView === 'orders'
+                            currrentPage === 'orders'
                             ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
                             : 'text-slate-300 hover:bg-slate-900'
                         }`}
                         >
                             <i className="fa-solid fa-box"></i>
                             My Orders
+                        </button>
+                        <button
+                        type='button'
+                        onClick={() => handleNavClick('checkout')}
+                        className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                            currrentPage === 'checkout'
+                            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+                            : 'text-slate-300 hover:bg-slate-900'
+                        }`}
+                        >
+                            <i className="fa-solid fa-credit-card"></i>
+                            Checkout
                         </button>
                         <div className="pt-2 border-t border-slate-800/80">
                             {user ? (
