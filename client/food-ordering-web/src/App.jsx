@@ -77,6 +77,8 @@ function App() {
     setCurrentPage('orders');
   };
 
+
+
   return (
       <div className='min-h-screen bg-slate-950 text-slate-100 flex flex-col'>
         <Navbar
@@ -113,6 +115,10 @@ function App() {
             onBack={() => setCurrentPage('home')}
             onClearCart={handleClearCart}
             />
+          )}
+
+          {currentPage === 'signup' && (
+            <Signup />
           )}
 
           {currentPage === 'orders' && (
@@ -177,12 +183,21 @@ function App() {
           )}
         </div>
         {isCartOpen && (
-          <div>
-            <div>
+          <div
+          className='fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex justify-end'
+          >
+            <div
+            className='w-full max-w-md bg-slate-900 border-l border-slate-800 h-full flex flex-col justify-between p-6'
+            >
               <div>
-                <div>
-                  <h2>
-
+                <div
+                className='flex items-center justify-between pb-4 border-b border-slate-800'
+                >
+                  <h2
+                  className='text-lg font-bold flex items-center gap-2'
+                  >
+                    <i className='fa-solid fa-cart-shopping' />
+                    Your Cart ({cartCount})
                   </h2>
                   <button
                   type='button'
@@ -196,11 +211,98 @@ function App() {
                 </div>
 
                 {cart.length === 0 ? (
-                  <div></div>
+                  <p
+                  className='text-sm text-slate-400 text-center py-12'
+                  >
+                    Your cart is currently empty. Add Items from the Home menu!
+                  </p>
                 ) : (
-                  <div></div>
+                  <div
+                  className='mt-4 space-y-3 max-h-[60vh] overflow-y-auto pr-1'
+                  >
+                    {cart.map((item) => (
+                      <div
+                      key={item.id}
+                      className='flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800'
+                      >
+                        <div>
+                          <p
+                          className='text-sm font-semibold text-white truncate'
+                          >
+                            {item.name}
+                          </p>
+                          <p
+                          className='text-xs text-sky-300 font-bold'
+                          >
+                            KES {(Number(item.price) * item.quality).toFixed(2)}
+                          </p>
+                        </div>
+                        <div
+                        className='flex items-center gap-2'
+                        >
+                          <button
+                          type='button'
+                          onClick={() => handleUpdateQty(item.id, -1)}
+                          className='p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200'
+                          >
+                            {item.quantity === 1 
+                            ? <i className="fa-solid fa-trash"></i>
+                            : <i className="fa-solid fa-minus"></i>}
+                          </button>
+                          <span
+                          className='text-sm font-bold w-5 text-center'
+                          >
+                            {item.quantity}
+                          </span>
+                          <button
+                          type='button'
+                          onClick={() => handleUpdateQty(item.id, 1)}
+                          className='p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200'
+                          >
+                            <i
+                            className='fa-solid fa-plus'
+                            ></i>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
+
+              {cart.length > 0 && (
+                <div
+                  className='pt-4 border-t border-slate-800 space-y-4'
+                >
+                  <div
+                  className='flex justify-between text-base font-bold'
+                  >
+                    <span
+                    className='text-slate-300'
+                    >
+                      Subtotal
+                    </span>
+                    <span
+                    className='text-sky-400'
+                    >
+                      KES {cartSubtotal.toFixed(2)}
+                    </span>
+                  </div>
+                  <button
+                  type='button'
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    setCurrentPage('checkout');
+                  }}
+                  className='w-full py-3.5 px-4 rounded-xl bg-sky-400 hover:bg-sky-500 text-white font-bold flex items-center justify-center gap-2 transition'
+                  >
+                    Proceed to Checkout
+                    <i
+                    className='fa-solid fa-arrow-right'
+                    ></i>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import Login from "./pages/login"
 import Signup from "./pages/signup"
 
@@ -22,7 +21,6 @@ export default function Navbar({
 
     
     
-    const [activeTab, setActiveTab] = useState('login')
 
     return(
         <>
@@ -62,12 +60,11 @@ export default function Navbar({
                         <button
                         type='button'
                         onClick={() => handleNavClick('orders')}
-                        className={
-        `inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
-            currrentPage === 'orders'
-            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
-            : 'text-slate-300 hover:text-white hover:bg-slate-900'
-        }`}
+                        className={`inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
+                            currrentPage === 'orders'
+                            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+                            : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                        }`}
                         >
                             <i className="fa-solid fa-box"></i>
                             My Orders
@@ -75,12 +72,11 @@ export default function Navbar({
                         <button
                         type='button'
                         onClick={() => handleNavClick('checkout')}
-                        className={
-        `inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
-            currrentPage === 'checkout'
-            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
-            : 'text-slate-300 hover:text-white hover:bg-slate-900'
-        }`}
+                        className={`inline-flex items-center space-x-2 px-3.5 rounded-xl text-sm font-semibold transition ${
+                            currrentPage === 'checkout'
+                            ? 'bg-sky-400/15 text-sky-300 border border-sky-400/30'
+                            : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                        }`}
                         >
                             <i className="fa-solid fa-credit-card"></i>
                             Checkout
@@ -217,9 +213,9 @@ export default function Navbar({
                             ) : (
                                 <button
                         type='button'
-                        onClick={() => setActiveTab('signup')}
+                        onClick={() => handleNavClick('signup')}
                         className={`uppercase px-3 py-2 rounded-xl w-full border font-semibold hover:scale-105 ${
-                            activeTab === 'signup' 
+                            currrentPage = 'signup'
                             ? 'bg-sky-400 text-slate-700 border-sky-400' 
                             : 'border-sky-400 text-sky-400'}`}
                         >

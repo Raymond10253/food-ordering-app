@@ -155,27 +155,63 @@ export default function Signup({
                             className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50"
                             />
                         </div>
-                        <div>
+                        <div
+                        className="relative"
+                        >
                             <label
                             className="block font-semibold text-sky-500 mb-2"
                             >
                                 Password
                             </label>
+                            <button
+                            type='button'
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            title={showPassword ? 'Hide password' : 'Show password'}
+                            className="absolute text-slate-400 hover:text-slate-300 left-[250px] top-1/2"
+                            >
+                                {showPassword ? 
+                                <i
+                                className="fa-solid fa-eye"
+                                ></i>
+                                :
+                                <i
+                                className="fa-solid fa-eye-slash"
+                                ></i>}
+                            </button>
                             <input 
                             type="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                             required
-                            className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50 focus:outline-none"
+                            className="border rounded-xl w-full py-2.5 bg-sky-400/20 border-sky-400/50 focus:outline-none px-2"
                             />
                         </div>
-                        <div>
+                        <div
+                        className="relative"
+                        >
                             <label
                             className="block font-semibold text-sky-500 mb-2"
                             >
                                 Confirm password
                             </label>
+                            <button
+                            type='button'
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            title={showPassword ? 'Hide password' : 'show password'}
+                            className="absolute text-slate-400 hover:text-slate-300"
+                            >
+                                {showPassword ? 
+                                <i
+                                className="fa-solid fa-eye"
+                                >
+                                </i> 
+                                : 
+                                <i
+                                className="fa-solid fa-eye-slash"
+                                >
+                                </i>}
+                            </button>
                             <input 
                             type="password"
                             name="confirmpassword"
